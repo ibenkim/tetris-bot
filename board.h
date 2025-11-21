@@ -27,23 +27,7 @@ class Board {
     char** grid; 
     int nRows; 
     int nCols; 
-
-
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif
