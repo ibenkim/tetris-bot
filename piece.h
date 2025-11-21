@@ -4,33 +4,48 @@
 
 class Piece {
  public: 
-    // Initialize piece; c represents piece (e.g. L piece, O piece)
-    Piece(char c); 
+   // Initialize piece; c represents piece (e.g. L piece, O piece)
+   Piece(char c, int board_rows, int board_cols, char** board_state); 
 
-    // Destructor
-    ~Piece(); 
+   // Rotations
+   void Rotate_L(); 
+   void Rotate_R(); 
 
-    // Rotations
-    void Rotate_L(); 
-    void Rotate_R(); 
-
-    // Translations
-    void step_L(); 
-    void step_R(); 
-    void step_D();
+   // Translations
+   void step_L(); 
+   void step_R(); 
+   void step_D();
+   void hard_drop(); 
     
-    // Access variables
-    int getRow(); 
-    int getCol(); 
-    int getType(); 
-    int getRotation(); 
+   // Access variables
+   int getRow(); 
+   int getCol(); 
+   int getType(); 
+   int getRotation(); 
 
  private: 
-    int row; 
-    int col; 
+   // piece
+   int row; 
+   int col; 
+ 
+   // L piece, T piece, etc.
+   char type; 
 
-    char type; 
-    int rotation; 
+   // 0, 1, 2, 3 is clockwise
+   int rot; 
+   // length to each side of center, depending on rotation
+   int leftN[4]; 
+   int rightN[4]; 
+   int upN[4]; 
+   int downN[4]; 
+
+   // board dimensions
+   int max_up; 
+   int max_right; 
+
+   // board state
+   char** board; 
+
 }; 
 
 
