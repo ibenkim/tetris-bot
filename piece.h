@@ -38,6 +38,9 @@ class Piece {
    int rightN[4]; 
    int upN[4]; 
    int downN[4]; 
+   // coords the piece takes up (1st indicie is rotation)
+   int Xcoords[4][4]; 
+   int Ycoords[4][4]; 
 
    // board dimensions
    int max_up; 
