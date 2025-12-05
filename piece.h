@@ -8,14 +8,14 @@ class Piece {
    Piece(char c, int board_rows, int board_cols, char** board_state); 
 
    // Rotations
-   void Rotate_L(); 
-   void Rotate_R(); 
+   virtual void Rotate_L(); 
+   virtual void Rotate_R(); 
 
    // Translations
-   void step_L(); 
-   void step_R(); 
-   void step_D();
-   void hard_drop(); 
+   virtual void step_L(); 
+   virtual void step_R(); 
+   virtual void step_D();
+   virtual void hard_drop(); 
     
    // Access variables
    int getRow(); 
@@ -23,7 +23,7 @@ class Piece {
    int getType(); 
    int getRotation(); 
 
- private: 
+ protected: 
    // piece
    int row; 
    int col; 
