@@ -1,4 +1,5 @@
 #include "game.h"
+#include "Lpiece.h"
 #include "Tpiece.h"
 #include <cstdlib>
 #include <ctime>
@@ -42,7 +43,8 @@ void Game::Start() {
         if (currentPiece) {
           // Check if this cell is part of the current piece
           for (int k = 0; k < 4; ++k) {
-            if (i == currentPiece->getRow() + currentPiece->getRelRow(k) && j == currentPiece->getCol() + currentPiece->getRelCol(k)) {
+            if (i == currentPiece->getRow() + currentPiece->getRelRow(k) &&
+                j == currentPiece->getCol() + currentPiece->getRelCol(k)) {
               cout << (char)currentPiece->getType();
               isPiece = true;
               break;
@@ -109,8 +111,14 @@ int Game::getLevel() const { return level; }
 bool Game::isGameOver() const { return gameOver; }
 
 void Game::SpawnPiece() {
-  // Only T piece is implemented for now
-  currentPiece = new Tpiece(board.getRows(), board.getCols(), board.getGrid());
+  int pieceType = rand() % 2;
+  if (pieceType == 0) {
+    currentPiece =
+        new Tpiece(board.getRows(), board.getCols(), board.getGrid());
+  } else {
+    currentPiece =
+        new Lpiece(board.getRows(), board.getCols(), board.getGrid());
+  }
 }
 
 bool Game::MoveCurrentPiece(int dx, int dy) {
