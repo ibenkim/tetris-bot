@@ -22,6 +22,11 @@ public:
   // Place piece
   void PlacePiece(char c, int row, int col);
 
+  // Getters
+  int getRows() const;
+  int getCols() const;
+  char **getGrid() const;
+
 private:
   char **grid;
   int nRows;

@@ -63,3 +63,9 @@ void Board::PlacePiece(char c, int row, int col) {
     grid[row][col] = c;
   }
 }
+
+int Board::getRows() const { return nRows; }
+
+int Board::getCols() const { return nCols; }
+
+char **Board::getGrid() const { return grid; }
