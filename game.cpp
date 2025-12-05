@@ -42,8 +42,7 @@ void Game::Start() {
         if (currentPiece) {
           // Check if this cell is part of the current piece
           for (int k = 0; k < 4; ++k) {
-            if (i == currentPiece->getRow() + currentPiece->getRelRow(k) &&
-                j == currentPiece->getCol() + currentPiece->getRelCol(k)) {
+            if (i == currentPiece->getRow() + currentPiece->getRelRow(k) && j == currentPiece->getCol() + currentPiece->getRelCol(k)) {
               cout << (char)currentPiece->getType();
               isPiece = true;
               break;
