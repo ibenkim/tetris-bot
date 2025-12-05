@@ -4,30 +4,28 @@
 #include "piece.h"
 
 class Board {
- public: 
-    // Default size: 20 x 10
-    Board(); 
-    // Custom size
-    Board(int rows, int cols); 
+public:
+  // Default size: 20 x 10
+  Board();
+  // Custom size
+  Board(int rows, int cols);
 
-    // Destructor
-    ~Board(); 
+  // Destructor
+  ~Board();
 
-    // Reset board; 
-    void BoardReset(); 
+  // Reset board;
+  void BoardReset();
 
-    // Shift board state after clearing lines
-    void LineClear(int row); 
+  // Shift board state after clearing lines
+  void LineClear(int row);
 
-    // Place piece
-    void PlacePiece(char c, int row, int col); 
+  // Place piece
+  void PlacePiece(char c, int row, int col);
 
-
- private: 
-    char** grid; 
-    int nRows; 
-    int nCols; 
+private:
+  char **grid;
+  int nRows;
+  int nCols;
 };
-
 
 #endif
