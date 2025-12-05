@@ -1,7 +1,5 @@
 #include "board.h"
 
-using namespace std;
-
 Board::Board() {
   nRows = 20;
   nCols = 10;
