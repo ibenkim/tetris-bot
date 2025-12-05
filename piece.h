@@ -17,6 +17,9 @@ public:
   virtual void step_D();
   virtual void hard_drop();
 
+  // check for collisions
+  virtual bool isValidPos(int r, int c, int rotation); 
+
   // Access variables
   int getRow();
   int getCol();
