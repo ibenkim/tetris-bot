@@ -1,4 +1,5 @@
 #include "game.h"
+#include "Tpiece.h"
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
@@ -12,6 +13,7 @@ Game::Game() {
   srand(time(0));
 
   // Initialize board
+  nextPiece = nullptr;
   SpawnPiece();
 }
 
@@ -25,16 +27,12 @@ Game::~Game() {
 void Game::Start() {
   while (!gameOver) {
     // Draw board
-    system("clear"); // Simple clear for linux/mac
+    system("clear");
     cout << "Score: " << score << " Level: " << level << endl;
 
     char **grid = board.getGrid();
     int rows = board.getRows();
     int cols = board.getCols();
-
-    // Create a temporary display grid to show current piece
-    // In a real app we might draw directly, but here we want to overlay the
-    // piece
 
     // Simple rendering
     for (int i = 0; i < rows; ++i) {
@@ -42,9 +40,14 @@ void Game::Start() {
       for (int j = 0; j < cols; ++j) {
         bool isPiece = false;
         if (currentPiece) {
-          if (i == currentPiece->getRow() && j == currentPiece->getCol()) {
-            cout << (char)currentPiece->getType();
-            isPiece = true;
+          // Check if this cell is part of the current piece
+          for (int k = 0; k < 4; ++k) {
+            if (i == currentPiece->getRow() + currentPiece->getRelRow(k) &&
+                j == currentPiece->getCol() + currentPiece->getRelCol(k)) {
+              cout << (char)currentPiece->getType();
+              isPiece = true;
+              break;
+            }
           }
         }
         if (!isPiece) {
@@ -107,11 +110,8 @@ int Game::getLevel() const { return level; }
 bool Game::isGameOver() const { return gameOver; }
 
 void Game::SpawnPiece() {
-  char types[] = {'I', 'J', 'L', 'O', 'S', 'T', 'Z'};
-  char type = types[rand() % 7];
-
-  currentPiece =
-      new Piece(type, board.getRows(), board.getCols(), board.getGrid());
+  // Only T piece is implemented for now
+  currentPiece = new Tpiece(board.getRows(), board.getCols(), board.getGrid());
 }
 
 bool Game::MoveCurrentPiece(int dx, int dy) {
@@ -142,20 +142,27 @@ void Game::RotateCurrentPiece(bool clockwise) {
 }
 
 void Game::LockPiece() {
-  board.PlacePiece(currentPiece->getType(), currentPiece->getRow(),
-                   currentPiece->getCol());
+  for (int i = 0; i < 4; i++) {
+    int r = currentPiece->getRow() + currentPiece->getRelRow(i);
+    int c = currentPiece->getCol() + currentPiece->getRelCol(i);
+    board.PlacePiece(currentPiece->getType(), r, c);
+  }
   delete currentPiece;
   currentPiece = nullptr;
 }
 
 bool Game::Collision(Piece *p, int newRow, int newCol) {
-  if (newRow < 0 || newRow >= board.getRows() || newCol < 0 ||
-      newCol >= board.getCols()) {
-    return true;
-  }
-  if (board.getGrid()[newRow][newCol] != ' ' &&
-      board.getGrid()[newRow][newCol] != 0) {
-    return true;
+  // Check collision for all 4 blocks
+  for (int i = 0; i < 4; ++i) {
+    int r = newRow + p->getRelRow(i);
+    int c = newCol + p->getRelCol(i);
+
+    if (r < 0 || r >= board.getRows() || c < 0 || c >= board.getCols()) {
+      return true;
+    }
+    if (board.getGrid()[r][c] != ' ' && board.getGrid()[r][c] != 0) {
+      return true;
+    }
   }
   return false;
 }

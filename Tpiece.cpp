@@ -24,8 +24,7 @@ using namespace std;
 
 */
 
-Tpiece::Tpiece(int board_rows, int board_cols, char **board_state)
-    : Piece('T', board_rows, board_cols, board_state) {
+Tpiece::Tpiece(int board_rows, int board_cols, char **board_state): Piece('T', board_rows, board_cols, board_state) {
 
   int tempX1[4] = {-1, 0, 0, 1};
   copy(begin(tempX1), end(tempX1), Xcoords[0]);
