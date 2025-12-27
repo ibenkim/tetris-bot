@@ -24,6 +24,8 @@ using namespace std;
 
 */
 
+//For testing purposes
+
 Zpiece::Zpiece(int board_rows, int board_cols, char** board_state) : Piece(board_rows, board_cols, board_state) {
     type = 'Z';
     

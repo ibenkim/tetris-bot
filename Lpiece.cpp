@@ -23,6 +23,8 @@ using namespace std;
  . 1 .
 */
 
+// For testing purposes
+
 Lpiece::Lpiece(int board_rows, int board_cols, char **board_state)
     : Piece('L', board_rows, board_cols, board_state) {
   int tempX1[4] = {-1, 0, 1, 1};
