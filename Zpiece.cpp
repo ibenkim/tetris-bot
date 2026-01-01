@@ -24,9 +24,7 @@ using namespace std;
 
 */
 
-Zpiece::Zpiece(int board_rows, int board_cols, char** board_state) : Piece(board_rows, board_cols, board_state) {
-    type = 'Z';
-    
+Zpiece::Zpiece(int board_rows, int board_cols, char** board_state) : Piece('Z', board_rows, board_cols, board_state) {
     int tempX1[4] = {-1, 0, 0, 1}; 
     copy(begin(tempX1), end(tempX1), Xcoords[0]);
     int tempY1[4] = {0, 1, 0, 1}; 
