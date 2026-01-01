@@ -24,8 +24,6 @@ using namespace std;
 
 */
 
-//For testing purposes
-
 Tpiece::Tpiece(int board_rows, int board_cols, char **board_state)
     : Piece('T', board_rows, board_cols, board_state) {
 
